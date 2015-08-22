@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/akansha/Documents/workspace.android/IRACRemote/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/akansha/Documents/workspace.android/IRACRemote/app/build/intermediates/pre-dexed/debug/classes-2a7588aecf9a1b64e63b9d26ea43c889c75dbd17.jar" />
+    </item>
+    <item
+        jar="/Users/akansha/Documents/workspace.android/IRACRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/akansha/Documents/workspace.android/IRACRemote/app/build/intermediates/pre-dexed/debug/classes-707a963b8aa69f47cf39495dbf60f77028736832.jar" />
+    </item>
+    <item
+        jar="/Users/akansha/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/akansha/Documents/workspace.android/IRACRemote/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-86996dd685db85e28579342922c209d6823fdf7f.jar" />
+    </item>
+    <item
+        jar="/Users/akansha/Documents/workspace.android/IRACRemote/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/akansha/Documents/workspace.android/IRACRemote/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-0195298af40d9b802e681ce6e162caa9ac99ca95.jar" />
+    </item>
+
+</items>
