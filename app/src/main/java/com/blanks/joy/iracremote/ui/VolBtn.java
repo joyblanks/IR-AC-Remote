@@ -38,7 +38,7 @@ public class VolBtn extends RelativeLayout implements OnGestureListener {
 		m_listener = l;
 	}
 
-	public void SetState(boolean state) {
+	public void setState(boolean state) {
 		mState = state;
 		ivRotor.setImageBitmap(state ? bmpRotorOn : bmpRotorOff);
 	}
@@ -64,7 +64,7 @@ public class VolBtn extends RelativeLayout implements OnGestureListener {
 		LayoutParams lp_ivKnob = new LayoutParams(w, h);// LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		lp_ivKnob.addRule(RelativeLayout.CENTER_IN_PARENT);
 		addView(ivRotor, lp_ivKnob);
-		SetState(mState);
+		setState(mState);
 		// enable gesture detector
 		gestureDetector = new GestureDetector(getContext(), this);
 
@@ -98,7 +98,7 @@ public class VolBtn extends RelativeLayout implements OnGestureListener {
 				deg = deg - 360;
 			Matrix matrix = new Matrix();
 			ivRotor.setScaleType(ScaleType.MATRIX);
-			matrix.postRotate((float) deg, m_nWidth / 2, m_nHeight / 2);// getWidth()/2, getHeight()/2);
+			matrix.postRotate(deg, m_nWidth / 2, m_nHeight / 2);// getWidth()/2, getHeight()/2);
 			ivRotor.setImageMatrix(matrix);
 		}
 	}

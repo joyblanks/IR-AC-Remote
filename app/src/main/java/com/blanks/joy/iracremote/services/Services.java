@@ -7,7 +7,7 @@ import android.widget.RemoteViews;
 
 import com.blanks.joy.iracremote.R;
 import com.blanks.joy.iracremote.constants.Constants;
-import com.blanks.joy.iracremote.devices.TransmissionCodes;
+import com.blanks.joy.iracremote.devices.TransmissionCode;
 import com.blanks.joy.iracremote.instance.Singleton;
 
 /**
@@ -18,7 +18,7 @@ public class Services {
     public static void power(Singleton inst, ConsumerIrManager cirm, RemoteViews rv){
         boolean isPoweredOn = inst.power;
         try {
-            TransmissionCodes data;
+            TransmissionCode data;
             //TextView tv = ((TextView) findViewById(R.id.temp));
 
             if (isPoweredOn) {
@@ -48,7 +48,7 @@ public class Services {
         }
         //ImageView swingView = (ImageView)findViewById(R.id.swing);
 
-        TransmissionCodes data;
+        TransmissionCode data;
         if (inst.swing) {
             data = inst.getIrCodesAll().get(inst.sequence, Constants.swing);
             //((TextView) findViewById(R.id.swingtext)).setText("Swing:OFF");

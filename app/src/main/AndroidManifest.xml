@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".main.RemoteEdgeActivity" >
+        <receiver android:name=".main.RemoteEdgeProvider" >
             <intent-filter>
                 <action android:name="com.samsung.android.cocktail.action.COCKTAIL_UPDATE" />
             </intent-filter>

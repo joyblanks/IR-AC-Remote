@@ -17,7 +17,7 @@ import com.samsung.android.sdk.look.cocktailbar.SlookCocktailManager;
 import com.samsung.android.sdk.look.cocktailbar.SlookCocktailProvider;
 
 
-public class RemoteEdgeActivity extends SlookCocktailProvider {
+public class RemoteEdgeProvider extends SlookCocktailProvider {
 
     private static final String TAG = "JoyIR";
     ConsumerIrManager mCIR;
@@ -74,7 +74,7 @@ public class RemoteEdgeActivity extends SlookCocktailProvider {
             Services.swing(m_Inst, mCIR, new RemoteViews(context.getPackageName(), R.layout.activity_remote_edge));
         }
         SlookCocktailManager mgr = SlookCocktailManager.getInstance(context);
-        int[] cocktailIds = mgr.getCocktailIds(new ComponentName(context,RemoteEdgeActivity.class));
+        int[] cocktailIds = mgr.getCocktailIds(new ComponentName(context,RemoteEdgeProvider.class));
         for (int cocktailId : cocktailIds) {
             mgr.notifyCocktailViewDataChanged(cocktailId, R.id.edge);
         }

@@ -50,10 +50,10 @@ public class Singleton extends Application {
     public int mode						= 0;
 
     public Singleton() {
-    super();
-    //goDoHex();
-    irCodesAll 						= new TransmissionList();
-    m_Instance 						= this;
+        super();
+        //goDoHex();
+        irCodesAll 						= new TransmissionList();
+        m_Instance 						= this;
     }
 
     public static Singleton getInstance() {
@@ -68,42 +68,41 @@ public class Singleton extends Application {
     }
 
     public static void Debug(String tag, String message) {
-    if (SET_DEBUG) {
-    Log.d(tag, message);
-    }
+        if (SET_DEBUG) {
+            Log.d(tag, message);
+        }
     }
 
     @Override
     public void onCreate() {
-    super.onCreate();
-
+        super.onCreate();
     }
 
     // must be called in every oncreate
     public void InitGUIFrame(Activity context) {
-    DisplayMetrics dm = new DisplayMetrics();
-    context.getWindowManager().getDefaultDisplay().getMetrics(dm);
-    m_nTotalW 						= dm.widthPixels;
-    m_nTotalH 						= dm.heightPixels;
-    m_fFrameS 						= (float) m_nTotalW / 750.0f;// scale factor
-    m_nFrameW 						= m_nTotalW;// compute our frame
-    m_nFrameH 						= (int) (960.0f * m_fFrameS);// compute our frame
-    m_nPaddingY 					= 0;// compute padding for our frame inside the total screen size
-    m_nPaddingX 					= (m_nTotalW - m_nFrameW) / 2;// compute padding for our frame inside the total screen size
-    Debug(LOG_TAG, "InitGUIFrame: frame:" + m_nFrameW + "x" + m_nFrameH + " Scale:" + m_fFrameS);
+        DisplayMetrics dm = new DisplayMetrics();
+        context.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        m_nTotalW 						= dm.widthPixels;
+        m_nTotalH 						= dm.heightPixels;
+        m_fFrameS 						= (float) m_nTotalW / 750.0f;// scale factor
+        m_nFrameW 						= m_nTotalW;// compute our frame
+        m_nFrameH 						= (int) (960.0f * m_fFrameS);// compute our frame
+        m_nPaddingY 					= 0;// compute padding for our frame inside the total screen size
+        m_nPaddingX 					= (m_nTotalW - m_nFrameW) / 2;// compute padding for our frame inside the total screen size
+        Debug(LOG_TAG, "InitGUIFrame: frame:" + m_nFrameW + "x" + m_nFrameH + " Scale:" + m_fFrameS);
     }
 
     public int Px2DIP(int value) {
-    final float scale = getResources().getDisplayMetrics().density;
-    return (int) ((float) value * scale);
+        final float scale = getResources().getDisplayMetrics().density;
+        return (int) ((float) value * scale);
     }
 
     // 9699758
 
     public int Scale(int v) {
-    float s = (float) v * m_fFrameS;
-    int rs =(s - (int) s >= 0.5) ?((int) s) + 1 : (int) s;
-    return rs;
+        float s = (float) v * m_fFrameS;
+        int rs =(s - (int) s >= 0.5) ?((int) s) + 1 : (int) s;
+        return rs;
     }
 
     public Bitmap getScaledBitmap(Context context, float scalex, float scaley, int id) {

@@ -10,10 +10,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blanks.joy.iracremote.R;
 import com.blanks.joy.iracremote.constants.Constants;
-import com.blanks.joy.iracremote.devices.TransmissionCodes;
+import com.blanks.joy.iracremote.devices.TransmissionCode;
 import com.blanks.joy.iracremote.instance.Singleton;
 import com.blanks.joy.iracremote.interfaces.VolButtonListener;
 import com.blanks.joy.iracremote.ui.VolBtn;
@@ -37,7 +38,7 @@ public class MainActivity extends Activity {
 		findViewById(R.id.fan).setOnClickListener(fanSendClickListener);
 		findViewById(R.id.mode).setOnClickListener(modeSendClickListener);
 		
-		((TextView) findViewById(R.id.sequence)).setText("" + m_Inst.sequence);
+		((TextView) findViewById(R.id.sequence)).setText(String.valueOf(m_Inst.sequence));
 		((ImageView) findViewById(R.id.fan)).setImageResource(m_Inst.getFan());
 		((ImageView) findViewById(R.id.mode)).setImageResource(m_Inst.getMode());
 		((ImageView) findViewById(R.id.swing)).setImageResource(m_Inst.getSwing());
@@ -55,7 +56,7 @@ public class MainActivity extends Activity {
 		panel.addView(rv, lp);
 
 		rv.setRotorPosAngle(m_Inst.tempAngle);
-		rv.SetState(m_Inst.power);
+		rv.setState(m_Inst.power);
 		rv.SetListener(new VolButtonListener() {
 			// trigger IR transmission for temp control
 			public void onTriggerChange() {
@@ -63,8 +64,8 @@ public class MainActivity extends Activity {
 					public void run() {
 
 						if (m_Inst.power) {
-							TransmissionCodes data = m_Inst.getIrCodesAll()
-									.get(m_Inst.sequence, m_Inst.temp); // (TransmissionCodes)samsung.get(m_Inst.temp);
+							TransmissionCode data = m_Inst.getIrCodesAll()
+									.get(m_Inst.sequence, m_Inst.temp); // (TransmissionCode)samsung.get(m_Inst.temp);
 							int freq = data.getFrequency();
                             int[] c = (data.getTransmission());
 							if (c != null) {
@@ -88,7 +89,7 @@ public class MainActivity extends Activity {
 		TextView tempCount = ((TextView) findViewById(R.id.temp));
 		Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Digital.otf");
 		tempCount.setTypeface(tf);
-		tempCount.setText(!m_Inst.power ? "--" : m_Inst.temp + "");
+		tempCount.setText(!m_Inst.power ? "--" : String.valueOf(m_Inst.temp));
 	}
 
 
@@ -96,31 +97,20 @@ public class MainActivity extends Activity {
 	View.OnClickListener swingSendClickListener = new View.OnClickListener() {
 		public void onClick(View v) {
 			if (!mCIR.hasIrEmitter()) {
-				Log.e(TAG, "No IR Emitter found\n");
+                Toast.makeText(getApplicationContext(), "No IR Emitter found", Toast.LENGTH_LONG).show();
+                Log.e(TAG, "No IR Emitter found\n");
 				return;
 			}
 			if (!m_Inst.power) {
 				return;
 			}
-			ImageView swingView = (ImageView)findViewById(R.id.swing);
 
-			TransmissionCodes data;
-			if (m_Inst.swing) {
-				data = m_Inst.getIrCodesAll().get(m_Inst.sequence, Constants.swing);
-				//((TextView) findViewById(R.id.swingtext)).setText("Swing:OFF");
-				swingView.setImageResource(R.drawable.swingoff);
-			} else {
-				data = m_Inst.getIrCodesAll().get(
-						m_Inst.sequence, Constants.swing + 1);
-				//((TextView) findViewById(R.id.swingtext)).setText("Swing:ON");
-				swingView.setImageResource(R.drawable.swingon);
-			}
 			m_Inst.swing = !m_Inst.swing;
+            TransmissionCode data = m_Inst.getIrCodesAll().get(m_Inst.sequence, m_Inst.swing ? Constants.swing + 1 : Constants.swing);
+            Toast.makeText(getApplicationContext(), (m_Inst.swing ? "Swing: ON" : "Swing: OFF"), Toast.LENGTH_SHORT).show();
+            ((ImageView)findViewById(R.id.swing)).setImageResource(m_Inst.swing  ? R.drawable.swingon : R.drawable.swingoff);
 
-            int freq = data.getFrequency();
-
-            int[] c = (data.getTransmission());
-			mCIR.transmit(freq, c);
+			mCIR.transmit(data.getFrequency(), data.getTransmission());
 		}
 	};
 
@@ -128,27 +118,27 @@ public class MainActivity extends Activity {
 	View.OnClickListener powerSendClickListener = new View.OnClickListener() {
 		public void onClick(View v) {
 			if (!mCIR.hasIrEmitter()) {
-				Log.e(TAG, "No IR Emitter found\n");
+                Toast.makeText(getApplicationContext(), "No IR Emitter found", Toast.LENGTH_LONG).show();
+				Log.e(TAG, "No IR Emitter found");
 				return;
 			}
             try {
-                TransmissionCodes data;
+                TransmissionCode data;
                 TextView tv = ((TextView) findViewById(R.id.temp));
 
-                if (rv.ismState()) {
+                if (m_Inst.power) {
                     data = m_Inst.getIrCodesAll().get(m_Inst.sequence, Constants.power + 1);
-                    rv.SetState(false);
+                    rv.setState(false);
                     m_Inst.power = false;
                     tv.setText("--");
 
                 } else {
                     // poweron
                     data = m_Inst.getIrCodesAll().get(m_Inst.sequence, Constants.power);
-                    rv.SetState(true);
-                    tv.setText("" + m_Inst.temp);
+                    rv.setState(true);
+                    tv.setText(String.valueOf(m_Inst.temp));
                     m_Inst.power = true;
                     ((ImageView) findViewById(R.id.swing)).setImageResource(m_Inst.swing ? R.drawable.swingon : R.drawable.swingoff);
-
                 }
                 int freq = data.getFrequency();
                 int[] c = (data.getTransmission());
@@ -163,15 +153,12 @@ public class MainActivity extends Activity {
 	// sequence btn
 	View.OnClickListener seqSendClickListener = new View.OnClickListener() {
 		public void onClick(View v) {
-
-			TextView tv = ((TextView) findViewById(R.id.sequence));
-			int seq = Integer.parseInt((String) tv.getText());
-			if (seq == 3) {
-				seq = 1;
-			} else
-				seq++;
-			tv.setText("" + seq);
+			TextView tvSeq = ((TextView) findViewById(R.id.sequence));
+			int seq = m_Inst.sequence;
+			seq =  (seq == 3) ? 1 : seq+1;
+            tvSeq.setText(String.valueOf(seq));
 			m_Inst.sequence = seq;
+            Toast.makeText(getApplicationContext(), "AC Transmit sequence: "+seq, Toast.LENGTH_SHORT).show();
 		}
 	};
 
@@ -180,7 +167,8 @@ public class MainActivity extends Activity {
 	View.OnClickListener fanSendClickListener = new View.OnClickListener() {
 		public void onClick(View v) {
 			if (!mCIR.hasIrEmitter()) {
-				Log.e(TAG, "No IR Emitter found\n");
+                Toast.makeText(getApplicationContext(), "No IR Emitter found", Toast.LENGTH_LONG).show();
+				Log.e(TAG, "No IR Emitter found");
 				return;
 			}
 			if (!m_Inst.power) {
@@ -188,28 +176,29 @@ public class MainActivity extends Activity {
 			}
 			ImageView tv = ((ImageView) findViewById(R.id.fan));
 			int seq = m_Inst.fan;
-
-			if (seq == 3) {
-				seq = 0;
-			} else
-				seq++;
+            String mode = "";
+			seq =  (seq == 3) ?  0 :  seq+1;
 			switch(seq){
-			case 0://auto
-				tv.setImageResource(R.drawable.fan_auto);
-				break;
-			case 1://low
-				tv.setImageResource(R.drawable.fan_low);
-				break;
-			case 2://med
-				tv.setImageResource(R.drawable.fan_medium);
-				break;
-			case 3://high
-				tv.setImageResource(R.drawable.fan_high);
-				break;
+                case 0://auto
+                    mode = "Auto";
+                    tv.setImageResource(R.drawable.fan_auto);
+                    break;
+                case 1://low
+                    mode = "Low";
+                    tv.setImageResource(R.drawable.fan_low);
+                    break;
+                case 2://med
+                    mode = "Medium";
+                    tv.setImageResource(R.drawable.fan_medium);
+                    break;
+                case 3://high
+                    mode = "High";
+                    tv.setImageResource(R.drawable.fan_high);
+                    break;
 			}
 			m_Inst.fan = seq;
-
-			TransmissionCodes data = m_Inst.getIrCodesAll().get(m_Inst.sequence, Constants.fan + seq);
+            Toast.makeText(getApplicationContext(), "Fan Speed "+mode, Toast.LENGTH_SHORT).show();
+			TransmissionCode data = m_Inst.getIrCodesAll().get(m_Inst.sequence, Constants.fan + seq);
 
 			int freq = data.getFrequency();
             int[] c = (data.getTransmission());
@@ -223,7 +212,8 @@ public class MainActivity extends Activity {
 	View.OnClickListener modeSendClickListener = new View.OnClickListener() {
 		public void onClick(View v) {
 			if (!mCIR.hasIrEmitter()) {
-				Log.e(TAG, "No IR Emitter found\n");
+                Toast.makeText(getApplicationContext(), "No IR Emitter found", Toast.LENGTH_LONG).show();
+                Log.e(TAG, "No IR Emitter found");
 				return;
 			}
 			if (!m_Inst.power) {
@@ -231,31 +221,34 @@ public class MainActivity extends Activity {
 			}
 			ImageView tv = ((ImageView) findViewById(R.id.mode));
 			int mode = m_Inst.mode;
+            String what = "";
 
-			if (mode == 4) {
-				mode = 0;
-			} else
-				mode++;
+			mode =  (mode == 4) ?  0 : mode+1;
 			switch(mode){
-			case 0://auto
-				tv.setImageResource(R.drawable.mode_a);
-				break;
-			case 1://cool
-				tv.setImageResource(R.drawable.mode_c);
-				break;
-			case 2://dry
-				tv.setImageResource(R.drawable.mode_d);
-				break;
-			case 3://fan
-				tv.setImageResource(R.drawable.mode_f);
-				break;
-			case 4://heat
-				tv.setImageResource(R.drawable.mode_h);
-				break;
+                case 0://auto
+                    what = "Auto";
+                    tv.setImageResource(R.drawable.mode_a);
+                    break;
+                case 1://cool
+                    what = "Cool";
+                    tv.setImageResource(R.drawable.mode_c);
+                    break;
+                case 2://dry
+                    what = "Dry";
+                    tv.setImageResource(R.drawable.mode_d);
+                    break;
+                case 3://fan
+                    what = "Fan";
+                    tv.setImageResource(R.drawable.mode_f);
+                    break;
+                case 4://heat
+                    what = "Heat";
+                    tv.setImageResource(R.drawable.mode_h);
+                    break;
 			}
 			m_Inst.mode = mode;
-
-			TransmissionCodes data = m_Inst.getIrCodesAll().get(m_Inst.sequence, Constants.mode + mode);
+            Toast.makeText(getApplicationContext(), "Operation Mode "+what, Toast.LENGTH_SHORT).show();
+			TransmissionCode data = m_Inst.getIrCodesAll().get(m_Inst.sequence, Constants.mode + mode);
 
 
 			int freq = data.getFrequency();
@@ -273,13 +266,12 @@ public class MainActivity extends Activity {
 		TextView tempView = ((TextView) findViewById(R.id.temp));
 
 		if (m_Inst.power) {
-			tempView.setText(temp + "");
+			tempView.setText(String.valueOf(temp));
 			m_Inst.temp = temp;
 			m_Inst.tempAngle = a;
 
 		} else
 			tempView.setText("--");
-        //Log.i(TAG, "Hello\n"+m_Inst.temp);
 	}
 
 
