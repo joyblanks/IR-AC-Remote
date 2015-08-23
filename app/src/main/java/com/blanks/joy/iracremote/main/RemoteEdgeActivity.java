@@ -15,6 +15,7 @@ import com.blanks.joy.iracremote.services.Services;
 import com.samsung.android.sdk.look.cocktailbar.SlookCocktailManager;
 import com.samsung.android.sdk.look.cocktailbar.SlookCocktailProvider;
 
+
 public class RemoteEdgeActivity extends SlookCocktailProvider {
 
     private static final String TAG = "JoyIR";
