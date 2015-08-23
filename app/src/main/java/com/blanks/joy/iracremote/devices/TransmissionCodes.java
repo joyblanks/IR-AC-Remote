@@ -42,10 +42,11 @@ public class TransmissionCodes {
 
     protected int[] count2duration(int freq, int[] countPattern) {
         int pulses = 1000000/freq;
+        int[] anotherFix = new int[countPattern.length];
         for (int i = 0; i < countPattern.length; i++) {
-            countPattern[i] = countPattern[i] * pulses;
+            anotherFix[i] = countPattern[i] * pulses;
         }
-        return countPattern;
+        return anotherFix;
     }
 	
 }

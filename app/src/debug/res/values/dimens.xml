@@ -4,4 +4,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="default_window_width">40dp</dimen>
+    <dimen name="default_panel_icon_padding">1dp</dimen>
+    <dimen name="item_margin">20dp</dimen>
+
 </resources>

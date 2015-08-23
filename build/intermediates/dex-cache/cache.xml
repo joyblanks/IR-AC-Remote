@@ -9,6 +9,20 @@
         <dex dex="/Users/akansha/Documents/workspace.android/IRACRemote/app/build/intermediates/pre-dexed/debug/classes-2a7588aecf9a1b64e63b9d26ea43c889c75dbd17.jar" />
     </item>
     <item
+        jar="/Users/akansha/Documents/workspace.android/IRACRemote/app/libs/look_v1.2.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="68b2c524422533ce5101f12579eda2194786188b">
+        <dex dex="/Users/akansha/Documents/workspace.android/IRACRemote/app/build/intermediates/pre-dexed/debug/look_v1.2.1-6cc86f6473f8d1ea8a1688e1a12b3e7a4f973a6d.jar" />
+    </item>
+    <item
+        jar="/Users/akansha/Documents/workspace.android/IRACRemote/app/libs/sdk-v1.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e2ce3786b6e9519934c4a54aaaaf39525bf4486c">
+        <dex dex="/Users/akansha/Documents/workspace.android/IRACRemote/app/build/intermediates/pre-dexed/debug/sdk-v1.0.0-36aa64803c12a2053395fa37a4bb40170fa3e745.jar" />
+    </item>
+    <item
         jar="/Users/akansha/Documents/workspace.android/IRACRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"

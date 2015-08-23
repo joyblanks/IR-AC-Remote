@@ -1,7 +1,5 @@
 package com.blanks.joy.iracremote.instance;
 
-import android.app.Application;
-
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -12,12 +10,11 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import com.blanks.joy.iracremote.devices.TransmissionList;
-
 
 import com.blanks.joy.iracremote.R;
+import com.blanks.joy.iracremote.devices.TransmissionList;
 /**
- * Created by akansha on 24/01/15.
+ * Created by Joy on 24/01/15.
  */
 
 
@@ -62,12 +59,12 @@ public class Singleton extends Application {
     public static Singleton getInstance() {
 
     if (m_Instance == null) {
-    synchronized (Singleton.class) {
-    if (m_Instance == null)
-    new Singleton();
-    }
-    }
-    return m_Instance;
+         synchronized (Singleton.class) {
+            if (m_Instance == null)
+                new Singleton();
+            }
+         }
+         return m_Instance;
     }
 
     public static void Debug(String tag, String message) {
@@ -181,28 +178,5 @@ public class Singleton extends Application {
 
         return this.swing ? R.drawable.swingon : R.drawable.swingoff;
     }
-
-
-    public void goDoHex() {
-        String hex = "0000 006C 0000 006A 0000 004C 0000 001C 0000 001C 0000 001C 0000 001C 0000 004B 0000 001C 0000 001C 0000 004B 0000 004B 0000 004B 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 004B 0000 001C 0000 001C 0000 001C 0000 004B 0000 004B 0000 001C 0000 001C 0000 004B 0000 004B 0000 004B 0000 004B 0000 004B 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 0169 0000 004C 0000 001C 0000 001C 0000 001C 0000 001C 0000 004B 0000 001C 0000 001C 0000 004B 0000 004B 0000 004B 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 004B 0000 001C 0000 001C 0000 001C 0000 004B 0000 004B 0000 001C 0000 001C 0000 004B 0000 004B 0000 004B 0000 004B 0000 004B 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 001C 0000 0192";
-
-        String[] splits = hex.split(" ");
-
-        int amount = splits.length;
-
-        int[] values = new int[amount];
-        String b = "";
-        for (int i = 0; i < amount; i++) {
-
-            String str = splits[i];
-
-            int parsedValue = Integer.parseInt(str, 16);
-
-            values[i] = parsedValue;
-            b += parsedValue == 0 ? "" : "," + parsedValue;
-        }
-        Log.d("String", b);
-    }
-
 
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cocktail-provider
+    label="@string/remote_edge_name"
+    previewImage="@drawable/remote_off"
+    updatePeriodMills="1800000"
+    permitVisibilityChanged="false"
+    configure="com.blanks.joy.cocktail.ExampleCocktailConfigure">
+</cocktail-provider>
