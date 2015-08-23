@@ -2,7 +2,7 @@
 <cocktail-provider
     label="@string/remote_edge_name"
     previewImage="@drawable/remote_off"
-    updatePeriodMills="1800000"
+    updatePeriodMills="4800000"
     permitVisibilityChanged="false"
     configure="com.blanks.joy.cocktail.ExampleCocktailConfigure">
 </cocktail-provider>

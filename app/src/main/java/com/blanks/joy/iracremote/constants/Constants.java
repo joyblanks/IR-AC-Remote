@@ -13,8 +13,7 @@ public final class Constants {
 
     //Edge
     public static String EDGE_POWER = "power";
-    public static String EDGE_SWING_ON = "on";
-    public static String EDGE_SWING_OFF = "off";
+    public static String EDGE_SWING = "swing";
     public static String EDGE_FAN_L = "low";
     public static String EDGE_FAN_M = "medium";
     public static String EDGE_FAN_H = "high";

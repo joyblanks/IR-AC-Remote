@@ -2,6 +2,7 @@ package com.blanks.joy.iracremote.services;
 
 import android.hardware.ConsumerIrManager;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.RemoteViews;
 
 import com.blanks.joy.iracremote.R;
@@ -39,6 +40,32 @@ public class Services {
         }catch (Exception e){
             Log.e(TAG, e.toString());
         }
+    }
+
+    public static void swing(Singleton inst, ConsumerIrManager cirm, RemoteViews rv){
+        if (!inst.power) {
+            return;
+        }
+        //ImageView swingView = (ImageView)findViewById(R.id.swing);
+
+        TransmissionCodes data;
+        if (inst.swing) {
+            data = inst.getIrCodesAll().get(inst.sequence, Constants.swing);
+            //((TextView) findViewById(R.id.swingtext)).setText("Swing:OFF");
+            //swingView.setImageViewResource().setImageResource(R.drawable.swingoff);
+        } else {
+            data = inst.getIrCodesAll().get(
+                    inst.sequence, Constants.swing + 1);
+            //((TextView) findViewById(R.id.swingtext)).setText("Swing:ON");
+            //swingView.setImageResource(R.drawable.swingon);
+        }
+        inst.swing = !inst.swing;
+        rv.setImageViewResource(R.id.swing, (inst.swing ? R.drawable.swingon : R.drawable.swingoff));
+
+        int freq = data.getFrequency();
+
+        int[] c = (data.getTransmission());
+        cirm.transmit(freq, c);
     }
 
 }
