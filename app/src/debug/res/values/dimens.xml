@@ -6,6 +6,6 @@
 
     <dimen name="default_window_width">40dp</dimen>
     <dimen name="default_panel_icon_padding">1dp</dimen>
-    <dimen name="item_margin">20dp</dimen>
+    <dimen name="item_margin">10dp</dimen>
 
 </resources>

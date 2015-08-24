@@ -4,15 +4,18 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.hardware.ConsumerIrManager;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 
 import com.blanks.joy.iracremote.R;
 import com.blanks.joy.iracremote.constants.Constants;
 import com.blanks.joy.iracremote.instance.Singleton;
 import com.blanks.joy.iracremote.services.Services;
+import com.blanks.joy.iracremote.utils.ScaryUtil;
 import com.samsung.android.sdk.look.cocktailbar.SlookCocktailManager;
 import com.samsung.android.sdk.look.cocktailbar.SlookCocktailProvider;
 
@@ -20,8 +23,7 @@ import com.samsung.android.sdk.look.cocktailbar.SlookCocktailProvider;
 public class RemoteEdgeProvider extends SlookCocktailProvider {
 
     private static final String TAG = "JoyIR";
-    ConsumerIrManager mCIR;
-    Singleton m_Inst;// = Singleton.getInstance();
+    private Singleton m_Inst;// = Singleton.getInstance();
 
     @Override
     public void onUpdate(Context context, SlookCocktailManager cocktailBarManager, int[] cocktailIds) {
@@ -32,27 +34,21 @@ public class RemoteEdgeProvider extends SlookCocktailProvider {
         rv.setImageViewResource(R.id.swing, (m_Inst.swing ? R.drawable.swingon : R.drawable.swingoff));
         rv.setImageViewResource(R.id.fan, m_Inst.getFan());
         rv.setImageViewResource(R.id.mode, m_Inst.getMode());
+        rv.setImageViewBitmap(R.id.temp, ScaryUtil.buildUpdate(context, !m_Inst.power ? "--" : String.valueOf(m_Inst.temp)));
         for (int cocktailId : cocktailIds) {
             cocktailBarManager.updateCocktail(cocktailId, rv);
         }
-
     }
 
     //onclick on buttons
     private void setPendingIntent(Context context, RemoteViews rv) {
         rv.setOnClickPendingIntent(R.id.edge, setPendingIntent(context, Constants.EDGE_POWER));
         rv.setOnClickPendingIntent(R.id.swing, setPendingIntent(context, Constants.EDGE_SWING));
-        //setPendingIntent(context, R.id.fan, new Intent(Intent.ACTION_DIAL), rv);
-        //setPendingIntent(context, R.id.mode, new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com")), rv);
+        rv.setOnClickPendingIntent(R.id.fan, setPendingIntent(context, Constants.EDGE_FAN));
+        rv.setOnClickPendingIntent(R.id.mode, setPendingIntent(context, Constants.EDGE_MODE));
     }
 
-    //onclick handlers
-    private void setPendingIntent(Context context, int rscId, Intent intent, RemoteViews rv) {
-        PendingIntent itemClickPendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        rv.setOnClickPendingIntent(rscId, itemClickPendingIntent);
-    }
-
-    //for onclick on the body
+    //for onclick on the generalized
     private PendingIntent setPendingIntent(Context context, String action) {
         Intent intent = new Intent(context, getClass());
         intent.setAction(action);
@@ -60,29 +56,28 @@ public class RemoteEdgeProvider extends SlookCocktailProvider {
     }
     @Override
     public void onReceive(Context context, Intent intent) {
-        super.onReceive(context,intent);
         String action = intent.getAction();
-        //RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.activity_remote_edge);
-
-        mCIR = (ConsumerIrManager) context.getSystemService(android.content.Context.CONSUMER_IR_SERVICE);
+        RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.activity_remote_edge);
         m_Inst = Singleton.getInstance();
-        //boolean isPoweredOn = m_Inst.power;
+        Log.d(TAG,"onReceive() : action - "+action);
+
         if (Constants.EDGE_POWER.equals(action)){
-            Services.power(m_Inst,mCIR,new RemoteViews(context.getPackageName(), R.layout.activity_remote_edge));
-            //rv.setInt(R.id.edge,"setBackgroundResource",R.drawable.remote_on);
+            Services.power(context, m_Inst, rv);
         }else if(Constants.EDGE_SWING.equals(action)){
-            Services.swing(m_Inst, mCIR, new RemoteViews(context.getPackageName(), R.layout.activity_remote_edge));
+            Services.swing(context, m_Inst, rv);
+        }else if(Constants.EDGE_FAN.equals(action)){
+            Services.fan(context, m_Inst, rv);
+        }else if(Constants.EDGE_MODE.equals(action)){
+            Services.mode(context, m_Inst, rv);
         }
+        intent.setAction("com.samsung.android.cocktail.action.COCKTAIL_UPDATE");
         SlookCocktailManager mgr = SlookCocktailManager.getInstance(context);
-        int[] cocktailIds = mgr.getCocktailIds(new ComponentName(context,RemoteEdgeProvider.class));
+        int[] cocktailIds = mgr.getCocktailIds(new ComponentName(context,getClass()));
         for (int cocktailId : cocktailIds) {
-            mgr.notifyCocktailViewDataChanged(cocktailId, R.id.edge);
+            //mgr.notifyCocktailViewDataChanged(cocktailId, R.id.edge);
+            mgr.updateCocktail(cocktailId, rv);
         }
-    }
-    @Override
-    public void onVisibilityChanged(Context context, int cocktailId, int visibility){
-        super.onVisibilityChanged(context, cocktailId, visibility);
-        Log.d(TAG, "visibility" + visibility);
+        super.onReceive(context,intent);
     }
 
 }

@@ -8,7 +8,15 @@
               android:orientation="vertical" >
 
 
-        <ImageView
+    <ImageView
+        android:id="@+id/temp"
+        android:layout_width="@dimen/default_window_width"
+        android:layout_height="@dimen/default_window_width"
+        android:layout_marginTop="@dimen/item_margin"
+        android:padding="@dimen/default_panel_icon_padding"
+        android:contentDescription="@string/ac_fn_temp_text" />
+
+    <ImageView
             android:id="@+id/fan"
             android:layout_width="@dimen/default_window_width"
             android:layout_height="@dimen/default_window_width"

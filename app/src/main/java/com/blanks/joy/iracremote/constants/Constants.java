@@ -12,17 +12,10 @@ public final class Constants {
 
 
     //Edge
-    public static String EDGE_POWER = "power";
-    public static String EDGE_SWING = "swing";
-    public static String EDGE_FAN_L = "low";
-    public static String EDGE_FAN_M = "medium";
-    public static String EDGE_FAN_H = "high";
-    public static String EDGE_FAN_A = "auto";
-    public static String EDGE_MODE_A = "modea";
-    public static String EDGE_MODE_C = "modec";
-    public static String EDGE_MODE_D = "moded";
-    public static String EDGE_MODE_F = "modef";
-    public static String EDGE_MODE_H = "modeh";
+    public static String EDGE_POWER     = "power";
+    public static String EDGE_SWING     = "swing";
+    public static String EDGE_FAN       = "fan";
+    public static String EDGE_MODE      = "mode";
 
 }
 
