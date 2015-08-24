@@ -80,4 +80,6 @@ public class RemoteEdgeProvider extends SlookCocktailProvider {
         super.onReceive(context,intent);
     }
 
+
+
 }

@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.widget.RemoteViews;
 
 import com.blanks.joy.iracremote.R;
 import com.blanks.joy.iracremote.devices.TransmissionList;
@@ -48,6 +49,8 @@ public class Singleton extends Application {
     public TransmissionList irCodesAll 	= null;
     public int fan						= 0;
     public int mode						= 0;
+
+
 
     public Singleton() {
         super();
@@ -177,5 +180,7 @@ public class Singleton extends Application {
 
         return this.swing ? R.drawable.swingon : R.drawable.swingoff;
     }
+
+
 
 }
