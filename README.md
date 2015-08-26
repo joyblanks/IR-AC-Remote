@@ -7,10 +7,10 @@ Remote Controller for Air Conditioners for Android devices having Infrared port
 	</tr>
 	<tr>
 		<td>
-			<img src="cFiles/remote.jpg" />
+			<img width="100%" src="cFiles/remote.jpg" />
 		</td>
 		<td>
-	        <img src="cFiles/edge.jpg" />
-	    </td>
+	        	<img width="100%" src="cFiles/edge.jpg" />
+	    	</td>
 	</tr>
 </table>
