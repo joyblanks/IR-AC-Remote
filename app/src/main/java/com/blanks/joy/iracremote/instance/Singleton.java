@@ -13,7 +13,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.blanks.joy.iracremote.R;
-import com.blanks.joy.iracremote.devices.TransmissionList;
+
 /**
  * Created by Joy on 24/01/15.
  */
@@ -46,7 +46,6 @@ public class Singleton extends Application {
     public int temp 					= 16;
     public int tempAngle 				= 220;
     public int sequence 				= 1;
-    public TransmissionList irCodesAll 	= null;
     public int fan						= 0;
     public int mode						= 0;
 
@@ -55,7 +54,6 @@ public class Singleton extends Application {
     public Singleton() {
         super();
         //goDoHex();
-        irCodesAll 						= new TransmissionList();
         m_Instance 						= this;
     }
 
@@ -126,14 +124,6 @@ public class Singleton extends Application {
 
     public int getMediumTextSize() {
     return Scale(10);
-    }
-
-    public TransmissionList getIrCodesAll() {
-        return irCodesAll;
-    }
-
-    public void setIrCodesAll(TransmissionList irCodesAll) {
-    this.irCodesAll = irCodesAll;
     }
 
 

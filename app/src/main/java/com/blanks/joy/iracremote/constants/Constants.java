@@ -16,6 +16,9 @@ public final class Constants {
     public static String EDGE_SWING     = "swing";
     public static String EDGE_FAN       = "fan";
     public static String EDGE_MODE      = "mode";
+    public static String EDGE_SEQUENCE  = "sequence";
+
+    public static String SEQUENCE       = "sequence";
 
 }
 

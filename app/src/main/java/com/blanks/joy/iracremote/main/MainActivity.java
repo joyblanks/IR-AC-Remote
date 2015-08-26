@@ -18,10 +18,10 @@ import com.blanks.joy.iracremote.devices.TransmissionCode;
 import com.blanks.joy.iracremote.instance.Singleton;
 import com.blanks.joy.iracremote.interfaces.VolButtonListener;
 import com.blanks.joy.iracremote.ui.VolBtn;
+import com.blanks.joy.iracremote.utils.ScaryUtil;
 
 public class MainActivity extends Activity {
 	private static final String TAG = "JoyIR";
-	ConsumerIrManager mCIR;
 
 	Singleton m_Inst = Singleton.getInstance();
 	VolBtn rv;
@@ -30,7 +30,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		mCIR = (ConsumerIrManager) getSystemService(android.content.Context.CONSUMER_IR_SERVICE);
 
 		findViewById(R.id.swing).setOnClickListener(swingSendClickListener);
 		findViewById(R.id.power).setOnClickListener(powerSendClickListener);
@@ -62,10 +61,9 @@ public class MainActivity extends Activity {
 			public void onTriggerChange() {
 				findViewById(R.id.temp).post(new Runnable() {
 					public void run() {
-
+                        ConsumerIrManager mCIR = ScaryUtil.getConsumerIRService(getApplicationContext());
 						if (m_Inst.power) {
-							TransmissionCode data = m_Inst.getIrCodesAll()
-									.get(m_Inst.sequence, m_Inst.temp); // (TransmissionCode)samsung.get(m_Inst.temp);
+							TransmissionCode data = ScaryUtil.getIRCode(m_Inst.sequence, m_Inst.temp); // (TransmissionCode)samsung.get(m_Inst.temp);
 							int freq = data.getFrequency();
                             int[] c = (data.getTransmission());
 							if (c != null) {
@@ -79,8 +77,7 @@ public class MainActivity extends Activity {
 			public void onRotate(final int percentage, final int angle) {
 				findViewById(R.id.temp).post(new Runnable() {
 					public void run() {
-						changeTemp(percentage, angle);
-
+				    ScaryUtil.changeTemp(percentage, angle, m_Inst,(TextView)findViewById(R.id.temp));
 					}
 				});
 			}
@@ -96,6 +93,7 @@ public class MainActivity extends Activity {
 	// swing btn
 	View.OnClickListener swingSendClickListener = new View.OnClickListener() {
 		public void onClick(View v) {
+            ConsumerIrManager mCIR = ScaryUtil.getConsumerIRService(getApplicationContext());
 			if (!mCIR.hasIrEmitter()) {
                 Toast.makeText(getApplicationContext(), "No IR Emitter found", Toast.LENGTH_LONG).show();
                 Log.e(TAG, "No IR Emitter found\n");
@@ -106,7 +104,7 @@ public class MainActivity extends Activity {
 			}
 
 			m_Inst.swing = !m_Inst.swing;
-            TransmissionCode data = m_Inst.getIrCodesAll().get(m_Inst.sequence, m_Inst.swing ? Constants.swing + 1 : Constants.swing);
+            TransmissionCode data = ScaryUtil.getIRCode(m_Inst.sequence, m_Inst.swing ? Constants.swing + 1 : Constants.swing);
             Toast.makeText(getApplicationContext(), (m_Inst.swing ? "Swing: ON" : "Swing: OFF"), Toast.LENGTH_SHORT).show();
             ((ImageView)findViewById(R.id.swing)).setImageResource(m_Inst.swing  ? R.drawable.swingon : R.drawable.swingoff);
 
@@ -117,7 +115,8 @@ public class MainActivity extends Activity {
 	// Power btn
 	View.OnClickListener powerSendClickListener = new View.OnClickListener() {
 		public void onClick(View v) {
-			if (!mCIR.hasIrEmitter()) {
+            ConsumerIrManager mCIR = ScaryUtil.getConsumerIRService(getApplicationContext());
+            if (!mCIR.hasIrEmitter()) {
                 Toast.makeText(getApplicationContext(), "No IR Emitter found", Toast.LENGTH_LONG).show();
 				Log.e(TAG, "No IR Emitter found");
 				return;
@@ -127,14 +126,14 @@ public class MainActivity extends Activity {
                 TextView tv = ((TextView) findViewById(R.id.temp));
 
                 if (m_Inst.power) {
-                    data = m_Inst.getIrCodesAll().get(m_Inst.sequence, Constants.power + 1);
+                    data = ScaryUtil.getIRCode(m_Inst.sequence, Constants.power + 1);
                     rv.setState(false);
                     m_Inst.power = false;
                     tv.setText("--");
 
                 } else {
                     // poweron
-                    data = m_Inst.getIrCodesAll().get(m_Inst.sequence, Constants.power);
+                    data = ScaryUtil.getIRCode(m_Inst.sequence, Constants.power);
                     rv.setState(true);
                     tv.setText(String.valueOf(m_Inst.temp));
                     m_Inst.power = true;
@@ -166,7 +165,8 @@ public class MainActivity extends Activity {
 	// fan btn
 	View.OnClickListener fanSendClickListener = new View.OnClickListener() {
 		public void onClick(View v) {
-			if (!mCIR.hasIrEmitter()) {
+            ConsumerIrManager mCIR = ScaryUtil.getConsumerIRService(getApplicationContext());
+            if (!mCIR.hasIrEmitter()) {
                 Toast.makeText(getApplicationContext(), "No IR Emitter found", Toast.LENGTH_LONG).show();
 				Log.e(TAG, "No IR Emitter found");
 				return;
@@ -198,7 +198,7 @@ public class MainActivity extends Activity {
 			}
 			m_Inst.fan = seq;
             Toast.makeText(getApplicationContext(), "Fan Speed "+mode, Toast.LENGTH_SHORT).show();
-			TransmissionCode data = m_Inst.getIrCodesAll().get(m_Inst.sequence, Constants.fan + seq);
+			TransmissionCode data = ScaryUtil.getIRCode(m_Inst.sequence, Constants.fan + seq);
 
 			int freq = data.getFrequency();
             int[] c = (data.getTransmission());
@@ -211,7 +211,8 @@ public class MainActivity extends Activity {
 	// fan btn
 	View.OnClickListener modeSendClickListener = new View.OnClickListener() {
 		public void onClick(View v) {
-			if (!mCIR.hasIrEmitter()) {
+            ConsumerIrManager mCIR = ScaryUtil.getConsumerIRService(getApplicationContext());
+            if (!mCIR.hasIrEmitter()) {
                 Toast.makeText(getApplicationContext(), "No IR Emitter found", Toast.LENGTH_LONG).show();
                 Log.e(TAG, "No IR Emitter found");
 				return;
@@ -248,34 +249,15 @@ public class MainActivity extends Activity {
 			}
 			m_Inst.mode = mode;
             Toast.makeText(getApplicationContext(), "Operation Mode "+what, Toast.LENGTH_SHORT).show();
-			TransmissionCode data = m_Inst.getIrCodesAll().get(m_Inst.sequence, Constants.mode + mode);
+			TransmissionCode data = ScaryUtil.getIRCode(m_Inst.sequence, Constants.mode + mode);
 
 
 			int freq = data.getFrequency();
 
             int[] c = data.getTransmission();
 			mCIR.transmit(freq, c);
-
-
 		}
 	};
-
-	// volume change call
-	private void changeTemp(int p, int a) {
-		int temp = p * 15 / 100 + 16;
-		TextView tempView = ((TextView) findViewById(R.id.temp));
-
-		if (m_Inst.power) {
-			tempView.setText(String.valueOf(temp));
-			m_Inst.temp = temp;
-			m_Inst.tempAngle = a;
-
-		} else
-			tempView.setText("--");
-	}
-
-
-
 
 
 
