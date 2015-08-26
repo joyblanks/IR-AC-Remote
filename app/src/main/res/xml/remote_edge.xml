@@ -3,6 +3,6 @@
     label="@string/remote_edge_name"
     previewImage="@drawable/remote_off"
     updatePeriodMills="4800000"
-    permitVisibilityChanged="false"
+    permitVisibilityChanged="true"
     configure="com.blanks.joy.cocktail.ExampleCocktailConfigure">
 </cocktail-provider>

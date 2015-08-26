@@ -16,11 +16,20 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:contentDescription="@android:string/ok"
-        android:text=""
         android:textSize="30sp"
+        android:layout_marginBottom="@dimen/temparature_bottom"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    
+    <TextView
+        android:id="@+id/brand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/temp"
+        android:layout_centerHorizontal="true"
+        android:text="com.blanks.joy"
+        android:textColor="@color/material_blue_grey_800"
+        android:textSize="@dimen/abc_action_bar_subtitle_bottom_margin_material"/>
+
 
     <ImageView
         android:id="@+id/fan"

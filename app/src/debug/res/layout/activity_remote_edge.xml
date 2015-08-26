@@ -8,51 +8,73 @@
               android:orientation="vertical" >
 
     <ImageView
-        android:id="@+id/volume"
+        android:id="@+id/logo"
+        android:layout_width="@dimen/default_window_width"
+        android:layout_height="@dimen/default_window_width"
+        android:layout_marginTop="@dimen/item_margin"
+        android:layout_marginBottom="@dimen/item_margin"
         android:clickable="true"
+        android:padding="@dimen/default_panel_logo_padding"
+        android:src="@drawable/ic_launcher"
+        android:contentDescription="@string/ac_logo"/>
+
+    <ImageView
+        android:id="@+id/volume"
+        android:clickable="false"
         android:layout_width="@dimen/default_window_width"
         android:layout_height="@dimen/volume_height"/>
+
+    <ImageView
+        android:id="@+id/sequence"
+        android:gravity="center"
+        android:clickable="true"
+        android:layout_marginTop="@dimen/item_margin"
+        android:layout_marginBottom="@dimen/item_margin"
+        android:layout_width="@dimen/default_window_width"
+        android:layout_height="@dimen/default_window_width"
+        android:padding="@dimen/default_panel_icon_padding"/>
 
     <ImageView
         android:id="@+id/temp"
         android:layout_width="@dimen/default_window_width"
         android:layout_height="@dimen/default_window_width"
         android:layout_marginTop="@dimen/item_margin"
+        android:layout_marginBottom="@dimen/item_margin"
         android:padding="@dimen/default_panel_icon_padding"
         android:contentDescription="@string/ac_fn_temp_text" />
 
     <ImageView
-            android:id="@+id/fan"
-            android:layout_width="@dimen/default_window_width"
-            android:layout_height="@dimen/default_window_width"
-            android:layout_marginTop="@dimen/item_margin"
-            android:layout_marginBottom="@dimen/item_margin"
-            android:clickable="true"
-            android:padding="@dimen/default_panel_icon_padding"
-            android:src="@drawable/fan_auto"
-            android:contentDescription="@string/ac_fan_speed_btn"/>
+        android:id="@+id/fan"
+        android:layout_width="@dimen/default_window_width"
+        android:layout_height="@dimen/default_window_width"
+        android:layout_marginTop="@dimen/item_margin"
+        android:layout_marginBottom="@dimen/item_margin"
+        android:clickable="true"
+        android:padding="@dimen/default_panel_icon_padding"
+        android:src="@drawable/fan_auto"
+        android:contentDescription="@string/ac_fan_speed_btn"/>
 
-        <ImageView
-            android:id="@+id/swing"
-            android:layout_width="@dimen/default_window_width"
-            android:layout_height="@dimen/default_window_width"
-            android:layout_marginTop="@dimen/item_margin"
-            android:layout_marginBottom="@dimen/item_margin"
-            android:clickable="true"
-            android:padding="@dimen/default_panel_icon_padding"
-            android:src="@drawable/swingon"
-            android:contentDescription="@string/ac_swing_button_text"/>
+    <ImageView
+        android:id="@+id/swing"
+        android:layout_width="@dimen/default_window_width"
+        android:layout_height="@dimen/default_window_width"
+        android:layout_marginTop="@dimen/item_margin"
+        android:layout_marginBottom="@dimen/item_margin"
+        android:clickable="true"
+        android:padding="@dimen/default_panel_icon_padding"
+        android:src="@drawable/swingon"
+        android:contentDescription="@string/ac_swing_button_text"/>
 
 
-        <ImageView
-            android:id="@+id/mode"
-            android:layout_width="@dimen/default_window_width"
-            android:layout_height="@dimen/default_window_width"
-            android:layout_marginTop="@dimen/item_margin"
-            android:layout_marginBottom="@dimen/item_margin"
-            android:clickable="true"
-            android:padding="@dimen/default_panel_icon_padding"
-            android:src="@drawable/mode_a"
-            android:contentDescription="@string/ac_fn_mode_btn"/>
+    <ImageView
+        android:id="@+id/mode"
+        android:layout_width="@dimen/default_window_width"
+        android:layout_height="@dimen/default_window_width"
+        android:layout_marginTop="@dimen/item_margin"
+        android:layout_marginBottom="@dimen/item_margin"
+        android:clickable="true"
+        android:padding="@dimen/default_panel_icon_padding"
+        android:src="@drawable/mode_a"
+        android:contentDescription="@string/ac_fn_mode_btn"/>
 
 </LinearLayout>

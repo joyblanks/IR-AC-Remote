@@ -4,5 +4,6 @@
     <string name="ac_fan_speed_btn">AC Fan Speed Button</string>
     <string name="ac_fn_mode_btn">AC Function Mode</string>
     <string name="ac_fn_temp_text">AC Temp</string>
+    <string name="ac_logo">AC Branding</string>
     <string name="remote_edge_name">IR AC Edge</string>
 </resources>
