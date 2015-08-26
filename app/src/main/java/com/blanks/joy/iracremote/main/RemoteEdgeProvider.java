@@ -74,7 +74,7 @@ public class RemoteEdgeProvider extends SlookCocktailProvider {
         }else if(Constants.EDGE_SEQUENCE.equals(action)){
             m_Inst.sequence = m_Inst.sequence == 3 ? 1 : m_Inst.sequence+1;
             rv.setImageViewBitmap(R.id.sequence, ScaryUtil.buildSequence(context, String.valueOf(m_Inst.sequence)));
-        }else if(action!=null && action.indexOf("COCKTAIL_VISIBILITY_CHANGED") > -1){
+        }else if(action!=null && action.indexOf(Constants.COCKTAIL_VISIBILITY_CHANGED) > -1){
             rv.setInt(R.id.edge,"setBackgroundResource",m_Inst.power ? R.drawable.remote_on : R.drawable.remote_off);
             rv.setImageViewResource(R.id.swing, (m_Inst.swing ? R.drawable.swingon : R.drawable.swingoff));
             rv.setImageViewResource(R.id.fan, m_Inst.getFan());
@@ -82,7 +82,7 @@ public class RemoteEdgeProvider extends SlookCocktailProvider {
             rv.setImageViewBitmap(R.id.sequence, ScaryUtil.buildSequence(context, String.valueOf(m_Inst.sequence)));
             rv.setImageViewBitmap(R.id.temp, ScaryUtil.buildUpdate(context, !m_Inst.power ? "--" : String.valueOf(m_Inst.temp)));
         }
-        intent.setAction("com.samsung.android.cocktail.action.COCKTAIL_UPDATE");
+        intent.setAction(Constants.COCKTAIL_UPDATE);
         SlookCocktailManager mgr = SlookCocktailManager.getInstance(context);
         int[] cocktailIds = mgr.getCocktailIds(new ComponentName(context,getClass()));
         for (int cocktailId : cocktailIds) {

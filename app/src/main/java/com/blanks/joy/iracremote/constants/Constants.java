@@ -20,5 +20,8 @@ public final class Constants {
 
     public static String SEQUENCE       = "sequence";
 
+    public static String COCKTAIL_VISIBILITY_CHANGED    = "com.samsung.android.cocktail.action.COCKTAIL_VISIBILITY_CHANGED";
+    public static String COCKTAIL_UPDATE                = "com.samsung.android.cocktail.action.COCKTAIL_UPDATE";
+
 }
 
