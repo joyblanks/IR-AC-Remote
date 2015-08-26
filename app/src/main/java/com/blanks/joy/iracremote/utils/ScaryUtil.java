@@ -144,7 +144,7 @@ public class ScaryUtil {
     //get Transmission codes
     public static TransmissionCode getIRCode(int sequence, int what){
         IRdata ird = new IRdata();
-        SparseArray<TransmissionCode> transmitCodes = ird.initTransmitCodes(what);
+        SparseArray<TransmissionCode> transmitCodes = ird.initTransmitCodes(sequence);
         TransmissionCode code = transmitCodes.get(what);
         return code;
     }
