@@ -2,7 +2,8 @@
 Remote Controller for Air Conditioners for Android devices having Infrared port
 <table>
 	<tr>
-		<td colspan=2>Main Application Remote</td>
+		<td align=center>Main Application Remote</td>
+		<td align=center>Samsung Edge Panel</td>
 	</tr>
 	<tr>
 		<td>
