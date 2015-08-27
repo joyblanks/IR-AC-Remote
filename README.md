@@ -112,31 +112,24 @@ package com.samsung.android.sdk.look.cocktailbar;
 
 public class SlookCocktailProvider extends BroadcastReceiver {
     private static final java.lang.String TAG = "SlookCocktail";
-
     public SlookCocktailProvider() {
         /* compiled code */
     }
-
     public void onReceive(Context context, Intent intent) {
         /* compiled code */
     }
-
     public void onUpdate(Context context, SlookCocktailManager cocktailManager, int[] cocktailIds) {
         /* compiled code */
     }
-
     public void onEnabled(Context context) {
         /* compiled code */
     }
-
     public void onDisabled(Context context) {
         /* compiled code */
     }
-
     public void onVisibilityChanged(Context context, int cocktailId, int visibility) {
         /* compiled code */
     }
-
     private void insertLogForAPI(Context context, String apiName) {
         /* compiled code */
     }
