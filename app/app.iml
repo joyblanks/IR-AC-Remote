@@ -88,6 +88,7 @@
     <orderEntry type="library" exported="" name="look_v1.2.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />
+    <orderEntry type="library" exported="" name="HTCIR" level="project" />
   </component>
 </module>
 

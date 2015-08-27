@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.hardware.ConsumerIrManager;
+import android.os.Build;
 import android.os.Vibrator;
 import android.util.Log;
 import android.util.SparseArray;
@@ -17,9 +18,9 @@ import com.blanks.joy.iracremote.R;
 import com.blanks.joy.iracremote.constants.Constants;
 import com.blanks.joy.iracremote.devices.IRdata;
 import com.blanks.joy.iracremote.devices.TransmissionCode;
+import com.blanks.joy.iracremote.htc.ConsumerIrManagerCompat;
 import com.blanks.joy.iracremote.instance.Singleton;
 
-import java.util.HashMap;
 
 /**
  * Created by Joy on 24/08/15.
@@ -75,7 +76,7 @@ public class ScaryUtil {
             rv.setInt(R.id.edge,"setBackgroundResource", !inst.power ? R.drawable.remote_off : R.drawable.remote_on);
             rv.setImageViewBitmap(R.id.temp, ScaryUtil.buildUpdate(context, !inst.power ? "--" : String.valueOf(inst.temp)));
 
-            getConsumerIRService(context).transmit(data.getFrequency(), data.getTransmission());
+            ScaryUtil.transmit(context, data);
             vibrator.vibrate(pattern, -1);
         }catch (Exception e){
             Log.e(TAG, e.toString());
@@ -91,7 +92,7 @@ public class ScaryUtil {
         TransmissionCode data = getIRCode(inst.sequence, inst.swing ? Constants.swing + 1 : Constants.swing);
         rv.setImageViewResource(R.id.swing, (inst.swing ? R.drawable.swingon : R.drawable.swingoff));
 
-        getConsumerIRService(context).transmit(data.getFrequency(), data.getTransmission());
+        ScaryUtil.transmit(context, data);
     }
 
     public static void fan(Context context, Singleton inst,  RemoteViews rv){
@@ -102,7 +103,7 @@ public class ScaryUtil {
         TransmissionCode data = getIRCode(inst.sequence, Constants.fan + inst.fan);
 
         rv.setImageViewResource(R.id.fan, inst.getFan());
-        getConsumerIRService(context).transmit(data.getFrequency(), data.getTransmission());
+        ScaryUtil.transmit(context, data);
     }
 
 
@@ -116,7 +117,7 @@ public class ScaryUtil {
         TransmissionCode data = getIRCode(inst.sequence, Constants.mode + inst.mode);
 
         rv.setImageViewResource(R.id.mode, inst.getMode());
-        getConsumerIRService(context).transmit(data.getFrequency(), data.getTransmission());
+        ScaryUtil.transmit(context, data);
     }
 
 
@@ -140,7 +141,22 @@ public class ScaryUtil {
         return consumerIrManager;
     }
 
+    public static ConsumerIrManagerCompat getConsumerIrManagerCompat(Context context){
+        ConsumerIrManagerCompat mCIR = ConsumerIrManagerCompat.createInstance(context);
+        mCIR.start(); //for HTC - noop otherwise (also see onResume()/onPause() )
+        return mCIR;
+    }
 
+    public static void transmit(Context context, TransmissionCode data){
+        if (Build.MANUFACTURER.equalsIgnoreCase("HTC")) {
+            //TargetApi(19)
+            ScaryUtil.getConsumerIrManagerCompat(context).transmit(data.getFrequency(),data.getTransmissionPulses());
+        } else if (Build.MANUFACTURER.equalsIgnoreCase("SAMSUNG")) {
+            //TargetApi(21+)
+            ScaryUtil.getConsumerIRService(context).transmit(data.getFrequency(),data.getTransmission());
+        }
+
+    }
     //get Transmission codes
     public static TransmissionCode getIRCode(int sequence, int what){
         IRdata ird = new IRdata();

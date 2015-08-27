@@ -2,13 +2,6 @@
 <items version="2" >
 
     <item
-        jar="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/libs/sdk-v1.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="e2ce3786b6e9519934c4a54aaaaf39525bf4486c">
-        <dex dex="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/build/intermediates/pre-dexed/debug/sdk-v1.0.0-4c3c5a5e39f2d344c9a799016b20a2ed29f3ba30.jar" />
-    </item>
-    <item
         jar="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -23,11 +16,18 @@
         <dex dex="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/build/intermediates/pre-dexed/debug/classes-c97b95a8dff3e47ff3ca263b4714b64e8f6a3162.jar" />
     </item>
     <item
-        jar="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jar="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/libs/sdk-v1.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-858e7a4cec556d3ce3e576201e14794caba4b912.jar" />
+        sha1="e2ce3786b6e9519934c4a54aaaaf39525bf4486c">
+        <dex dex="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/build/intermediates/pre-dexed/debug/sdk-v1.0.0-4c3c5a5e39f2d344c9a799016b20a2ed29f3ba30.jar" />
+    </item>
+    <item
+        jar="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/libs/HTCIR.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ff46e3af5da0d351c424508ca5fe1e73ad149474">
+        <dex dex="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/build/intermediates/pre-dexed/debug/HTCIR-4f42b376a6287caf2002c2ad9b9826a2d66c90de.jar" />
     </item>
     <item
         jar="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/libs/look_v1.2.1.jar"
@@ -35,6 +35,13 @@
         revision="21.1.2"
         sha1="68b2c524422533ce5101f12579eda2194786188b">
         <dex dex="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/build/intermediates/pre-dexed/debug/look_v1.2.1-598ca1a1c5c593cc04dd34ed914f8d03d163054a.jar" />
+    </item>
+    <item
+        jar="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/akansha/Documents/workspace.android/IR-AC-Remote/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-858e7a4cec556d3ce3e576201e14794caba4b912.jar" />
     </item>
     <item
         jar="/Users/akansha/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"

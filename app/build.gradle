@@ -23,4 +23,11 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile files('libs/look_v1.2.1.jar')
+    compile files('libs/HTCIR.jar')
+}
+
+android {
+    packagingOptions {
+        exclude 'AndroidManifest.xml'
+    }
 }
