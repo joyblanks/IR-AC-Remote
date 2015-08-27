@@ -58,7 +58,7 @@ public static void transmit(Context context, TransmissionCode data){
 ### Getting the Transmission Code from Raw pulses
 
 ```java
-TransmissionCode new TransmissionCode(38028, "123,339,14,23 . . . . . . .3,53,23,23,2500");
+TransmissionCode data = new TransmissionCode(38028, "123,339,23 . . . . .3,53,23,2500");
 
 /**
  * TransmissionCode :: getTransmissionPulses()
