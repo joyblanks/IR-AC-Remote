@@ -151,7 +151,7 @@ public class ScaryUtil {
         if (Build.MANUFACTURER.equalsIgnoreCase("HTC")) {
             //TargetApi(19)
             ScaryUtil.getConsumerIrManagerCompat(context).transmit(data.getFrequency(),data.getTransmissionPulses());
-        } else if (Build.MANUFACTURER.equalsIgnoreCase("SAMSUNG")) {
+        } else {
             //TargetApi(21+)
             ScaryUtil.getConsumerIRService(context).transmit(data.getFrequency(),data.getTransmission());
         }

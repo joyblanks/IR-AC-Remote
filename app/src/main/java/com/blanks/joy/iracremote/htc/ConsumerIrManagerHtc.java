@@ -64,7 +64,7 @@ public class ConsumerIrManagerHtc extends ConsumerIrManagerCompat {
 				rid = (UUID) msg.getData().getSerializable(CIRControl.KEY_RESULT_ID);
 				Log.i(TAG, "Receive IR Returned UUID: " + rid);
 				
-				//TODO: check learning IR data which is in HtcIrData object.
+				//: check learning IR data which is in HtcIrData object.
 				//If data is null, the learning is not successful, so check error type.
 				mLearntKey = (HtcIrData) msg.getData().getSerializable(CIRControl.KEY_CMD_RESULT);
 				
@@ -82,7 +82,7 @@ public class ConsumerIrManagerHtc extends ConsumerIrManagerCompat {
 				else {
 					switch(msg.arg1) {
 					case CIRControl.ERR_LEARNING_TIMEOUT:
-						//TODO: timeout error because of CIR do not receive IR data.
+						//: timeout error because of CIR do not receive IR data.
 						text = "Learn IR Error: ERR_LEARNING_TIMEOUT";
 						break;
 					case CIRControl.ERR_PULSE_ERROR:
@@ -168,7 +168,7 @@ public class ConsumerIrManagerHtc extends ConsumerIrManagerCompat {
     				mControl.transmitIRCmd (ird, false); //no drop command
     			}
     			catch(IllegalArgumentException iae) {
-    				//TODO: developer will get exception if any argument of HtcIrData is incorrect  
+    				//: developer will get exception if any argument of HtcIrData is incorrect
     				Log.e(TAG, "new HtcIrData: " + iae);
     				throw iae;
     			}
@@ -184,7 +184,7 @@ public class ConsumerIrManagerHtc extends ConsumerIrManagerCompat {
 	@Override
 	public CarrierFrequencyRange[] getCarrierFrequencies() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			//TODO: call getCarrierFrequencies() via reflection in this case
+			//: call getCarrierFrequencies() via reflection in this case
 			// or call standard API from a separate activity
 		} else {
 			Log.i(TAG, "getCarrierFrequencies() is not available via the HTC CIR APIs");
