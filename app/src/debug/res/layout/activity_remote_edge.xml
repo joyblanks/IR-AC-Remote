@@ -13,16 +13,22 @@
         android:layout_height="@dimen/default_window_width"
         android:layout_marginTop="@dimen/item_margin"
         android:layout_marginBottom="@dimen/item_margin"
-        android:clickable="true"
+        android:clickable="false"
         android:padding="@dimen/default_panel_logo_padding"
         android:src="@drawable/ic_launcher"
         android:contentDescription="@string/ac_logo"/>
 
-    <ImageView
+
+    <ProgressBar
         android:id="@+id/volume"
-        android:clickable="false"
         android:layout_width="@dimen/default_window_width"
-        android:layout_height="@dimen/volume_height"/>
+        android:layout_height="@dimen/volume_height"
+        android:progress="20"
+        android:clickable="true"
+        android:visibility="invisible"
+        android:indeterminate="false"
+        style="@style/Widget.ProgressBar.Vertical"
+    />
 
     <ImageView
         android:id="@+id/sequence"

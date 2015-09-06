@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"  package="com.blanks.joy.iracremote">
 
-    <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="19" />
+    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="23" />
 
     <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
     <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
@@ -15,16 +15,19 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.blanks.joy.iracremote.main.IRACRemoteActivity"
-            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".main.RemoteEdgeProvider" >
+        <receiver android:name="com.blanks.joy.iracremote.main.RemoteEdgeProvider" >
             <intent-filter>
                 <action android:name="com.samsung.android.cocktail.action.COCKTAIL_UPDATE" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="com.blanks.joy.iracremote.SENSE_TEMPERATURE" />
             </intent-filter>
 
             <meta-data
